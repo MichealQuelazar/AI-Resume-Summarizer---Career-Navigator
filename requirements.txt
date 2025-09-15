@@ -1,0 +1,13 @@
+streamlit 
+pymupdf 
+python-dotenv
+apify-client
+google-generativeai
+chromadb
+sentence-transformers
+pandas
+numpy
+plotly
+langchain
+langchain-community
+langchain-google-genai
