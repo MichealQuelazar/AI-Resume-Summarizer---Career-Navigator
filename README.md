@@ -29,22 +29,33 @@ opportunities by analyzing resumes, job postings, and skill gaps.
 ## 🚀 Quick Start
 
 ```bash \# Clone the repo git clone
-https://github.com/your-username/career-navigator.git cd
-career-navigator
+https://github.com/MichealQuelazar/AI-Resume-Summarizer---Career-Navigator.git
 ```
 
 ## Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
+## Run the app
 ```bash
-# Run the app
 streamlit run app.py
 ```
+## Screenshots
+<img width="1880" height="928" alt="Screenshot 2025-09-28 143729" src="https://github.com/user-attachments/assets/ff4c1239-5e1e-4e1d-99f5-0b8e16ad716e" />
+<img width="1866" height="795" alt="Screenshot 2025-09-28 150345" src="https://github.com/user-attachments/assets/53b43529-1557-4b0a-9780-7807fd72a6fb" />
+<img width="1919" height="758" alt="Screenshot 2025-09-28 145138" src="https://github.com/user-attachments/assets/bd245847-a862-473a-8362-95beb26b5225" />
+<img width="1504" height="875" alt="Screenshot 2025-09-28 145445" src="https://github.com/user-attachments/assets/280b9c62-4e81-45f2-ae15-1bb9a50a1202" />
+<img width="1404" height="635" alt="image" src="https://github.com/user-attachments/assets/3f2ff9b6-9043-474b-b387-c58e98509089" />
 
-## 🎥 Demo Video    
-[Demo pt1](https://drive.google.com/file/d/1SAXS_lVL5ijFA62GNP3oJ0D8h6NzldO2/view?usp=sharing) 
-[Demo pt2](https://drive.google.com/file/d/1SAXS_lVL5ijFA62GNP3oJ0D8h6NzldO2/view?usp=sharing) 
+
+
+
+##  Demo(pt1 and 2)
+[<img width="640" alt="Demo Part 1" src="https://github.com/user-attachments/assets/ff4c1239-5e1e-4e1d-99f5-0b8e16ad716e" />](https://drive.google.com/file/d/1SAXS_lVL5ijFA62GNP3oJ0D8h6NzldO2/preview)
+
+
+[<img width="640" alt="Demo Part 2" src="https://github.com/user-attachments/assets/0404c056-72b9-4b06-be7e-a709d4a3df1b" />](https://drive.google.com/file/d/1vK4c-dGYzBcvGn9NHiXwnMN0LAUpuThE/preview)
+
 
 
 ## 🏆 Hackathon Context
