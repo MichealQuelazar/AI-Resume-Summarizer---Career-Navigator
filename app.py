@@ -1,6 +1,6 @@
 import streamlit as st
 import re
-from src.helper import extract_text_from_pdf, ask_gemini
+from src.helper import extract_text_from_pdf, ask_groq
 from src.job_api import fetch_linkedin_jobs
 from src.rag_engine import RAGEngine
 from src.career_analytics import CareerAnalytics
@@ -65,7 +65,7 @@ if page == "📄 Resume Analysis":
         
         with col1:
             with st.spinner("Analyzing your resume..."):
-                summary = ask_gemini(
+                summary = ask_groq(
                     f"Provide a comprehensive summary of this resume highlighting skills, education, experience, and strengths: \n\n{st.session_state.resume_text}", 
                     max_tokens=600
                 )
@@ -80,7 +80,7 @@ if page == "📄 Resume Analysis":
         
         with col2:
             with st.spinner("Identifying skill gaps..."):
-                gaps = ask_gemini(
+                gaps = ask_groq(
                     f"Analyze this resume and identify specific skill gaps, missing certifications, and areas for improvement based on current market demands: \n\n{st.session_state.resume_text}", 
                     max_tokens=500
                 )
@@ -95,7 +95,7 @@ if page == "📄 Resume Analysis":
         
         # Career roadmap
         with st.spinner("Creating personalized roadmap..."):
-            roadmap = ask_gemini(
+            roadmap = ask_groq(
                 f"Create a detailed 6-month and 1-year career roadmap for this person including specific skills to learn, certifications to pursue, and career moves to consider: \n\n{st.session_state.resume_text}", 
                 max_tokens=600
             )
@@ -190,7 +190,7 @@ elif page == "📊 Market Analytics":
     if st.session_state.resume_text:
         # Extract skills from resume
         skills_prompt = f"Extract the top 10 technical skills from this resume as a comma-separated list: {st.session_state.resume_text[:1000]}"
-        skills_text = ask_gemini(skills_prompt, max_tokens=100)
+        skills_text = ask_groq(skills_prompt, max_tokens=100)
         user_skills = [skill.strip().lower() for skill in skills_text.split(',')]
         
         # Experience level
@@ -249,7 +249,7 @@ elif page == "🔍 Job Search":
         if st.button("🎯 Get Personalized Job Recommendations", type="primary"):
             with st.spinner("Analyzing your profile and finding matching jobs..."):
                 # Extract keywords using AI
-                keywords = ask_gemini(
+                keywords = ask_groq(
                     f"Based on this resume, suggest the best job search keywords (comma-separated, max 5): \n\n{st.session_state.resume_text[:1000]}",
                     max_tokens=50
                 )
@@ -282,7 +282,7 @@ elif page == "🔍 Job Search":
         if st.button("🔎 Get Job Recommendations"):
             with st.spinner("Fetching job recommendations..."):
                 # Generate resume summary for keyword extraction
-                summary = ask_gemini(
+                summary = ask_groq(
                     f"Provide a brief summary of this resume highlighting key skills and experience: \n\n{st.session_state.resume_text[:1000]}", 
                     max_tokens=200
                 )

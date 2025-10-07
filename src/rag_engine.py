@@ -5,7 +5,7 @@ from sentence_transformers import SentenceTransformer
 from typing import List, Dict, Any
 import os
 from dotenv import load_dotenv
-import google.generativeai as genai
+from groq import Groq
 
 load_dotenv()
 
@@ -18,9 +18,8 @@ class RAGEngine:
         self.encoder = SentenceTransformer('all-MiniLM-L6-v2')
         self.jobs_df = None
         
-        # Configure Gemini
-        genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-        self.model = genai.GenerativeModel("gemini-1.5-flash")
+        # Configure Groq
+        self.client_groq = Groq(api_key=os.getenv("GROQ_API_KEY"))
         
         self._initialize_vector_store()
     
@@ -127,7 +126,13 @@ class RAGEngine:
         Domain: [primary domain/field]
         """
         
-        skills_analysis = self.model.generate_content(skills_prompt).text
+        skills_response = self.client_groq.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[{"role": "user", "content": skills_prompt}],
+            max_tokens=500,
+            temperature=0.7
+        )
+        skills_analysis = skills_response.choices[0].message.content.strip()
         
         # Search for relevant jobs
         search_query = f"{skills_analysis} {user_query or ''}"
@@ -159,13 +164,13 @@ class RAGEngine:
         Be specific and actionable.
         """
         
-        insights = self.model.generate_content(
-            insights_prompt,
-            generation_config=genai.types.GenerationConfig(
-                max_output_tokens=800,
-                temperature=0.7
-            )
-        ).text
+        insights_response = self.client_groq.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[{"role": "user", "content": insights_prompt}],
+            max_tokens=800,
+            temperature=0.7
+        )
+        insights = insights_response.choices[0].message.content.strip()
         
         return {
             'insights': insights,
@@ -202,12 +207,12 @@ class RAGEngine:
         Be conversational and supportive.
         """
         
-        response = self.model.generate_content(
-            chat_prompt,
-            generation_config=genai.types.GenerationConfig(
-                max_output_tokens=600,
-                temperature=0.8
-            )
-        ).text
+        chat_response = self.client_groq.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[{"role": "user", "content": chat_prompt}],
+            max_tokens=600,
+            temperature=0.8
+        )
+        response = chat_response.choices[0].message.content.strip()
         
         return response

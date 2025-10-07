@@ -2,7 +2,7 @@ streamlit
 pymupdf 
 python-dotenv
 apify-client
-google-generativeai
+groq
 chromadb
 sentence-transformers
 pandas
@@ -10,4 +10,3 @@ numpy
 plotly
 langchain
 langchain-community
-langchain-google-genai

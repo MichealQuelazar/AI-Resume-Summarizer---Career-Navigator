@@ -17,7 +17,7 @@ JOBS_CSV_PATH = DATA_DIR / "jobs.csv"
 CHROMA_DB_PATH = BASE_DIR / "chroma_db"
 
 # AI Model settings
-GEMINI_MODEL = "gemini-1.5-flash"
+GROQ_MODEL = "llama-3.1-8b-instant"
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 MAX_TOKENS_DEFAULT = 500
 TEMPERATURE_DEFAULT = 0.7

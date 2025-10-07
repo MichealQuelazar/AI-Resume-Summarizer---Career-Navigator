@@ -64,11 +64,11 @@ def main():
     print("✅ Setup completed!")
     print("\n📋 Next steps:")
     print("1. Edit .env file and add your API keys:")
-    print("   - GOOGLE_API_KEY (from Google AI Studio)")
+    print("   - GROQ_API_KEY (from Groq Console)")
     print("   - APIFY_API_TOKEN (from Apify Console)")
     print("2. Run the application: streamlit run app.py")
     print("\n🔗 Useful links:")
-    print("- Google AI Studio: https://makersuite.google.com/app/apikey")
+    print("- Groq Console: https://console.groq.com/keys")
     print("- Apify Console: https://console.apify.com/account/integrations")
 
 if __name__ == "__main__":
