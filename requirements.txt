@@ -1,7 +1,6 @@
 streamlit 
 pymupdf 
 python-dotenv
-apify-client
 groq
 chromadb
 sentence-transformers
