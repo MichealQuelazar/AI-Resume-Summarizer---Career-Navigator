@@ -10,9 +10,12 @@ from groq import Groq
 load_dotenv()
 
 class RAGEngine:
-    def __init__(self, jobs_csv_path: str = "data/jobs.csv"):
-        """Initialize RAG engine with job database and vector store"""
-        self.jobs_csv_path = jobs_csv_path
+    def __init__(self, data_sources: List[str] = None):
+        """Initialize RAG engine with multiple data sources and vector store"""
+        if data_sources is None:
+            data_sources = ["data/jobs.csv"]
+        
+        self.data_sources = data_sources
         self.client = chromadb.PersistentClient(path="./chroma_db")
         self.collection = None
         self.encoder = SentenceTransformer('all-MiniLM-L6-v2')
@@ -22,6 +25,25 @@ class RAGEngine:
         self.client_groq = Groq(api_key=os.getenv("GROQ_API_KEY"))
         
         self._initialize_vector_store()
+    
+    def _load_multiple_files(self) -> pd.DataFrame:
+        """Load and combine multiple CSV files"""
+        dataframes = []
+        
+        for file_path in self.data_sources:
+            try:
+                if file_path.endswith('.csv'):
+                    df = pd.read_csv(file_path)
+                    df['source_file'] = file_path
+                    dataframes.append(df)
+                    print(f"Loaded {len(df)} records from {file_path}")
+            except Exception as e:
+                print(f"Error loading {file_path}: {e}")
+        
+        if not dataframes:
+            raise ValueError("No valid CSV files could be loaded")
+        
+        return pd.concat(dataframes, ignore_index=True, sort=False)
     
     def _initialize_vector_store(self):
         """Initialize or load the vector store with job data"""
@@ -34,11 +56,11 @@ class RAGEngine:
             self._create_vector_store()
     
     def _create_vector_store(self):
-        """Create vector store from jobs CSV"""
+        """Create vector store from multiple data sources"""
         print("Creating new job database...")
         
-        # Load jobs data
-        self.jobs_df = pd.read_csv(self.jobs_csv_path)
+        # Load jobs data from multiple sources
+        self.jobs_df = self._load_multiple_files()
         
         # Create collection
         self.collection = self.client.create_collection(
