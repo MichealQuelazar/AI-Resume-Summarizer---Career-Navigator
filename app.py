@@ -25,14 +25,14 @@ if 'analytics_engine' not in st.session_state:
 
 
 # Sidebar navigation
-st.sidebar.title("🎯 Navigation")
+st.sidebar.title(" Navigation")
 page = st.sidebar.selectbox(
     "Choose a feature:",
-    ["📄 Resume Analysis", "💬 Career Chat", "📊 Market Analytics", "🔍 Job Search"]
+    [" Resume Analysis", " Career Chat", " Market Analytics", " Job Search"]
 )
 
 # Main title
-st.title("🤖 AI Resume Summarizer & Career Navigator")
+st.title(" AI Resume Summarizer & Career Navigator")
 st.markdown("*Your intelligent career companion powered by RAG technology*")
 
 # Initialize engines
@@ -48,18 +48,18 @@ if st.session_state.rag_engine is None:
 
 # Resume upload section (always visible)
 with st.container():
-    st.subheader("📤 Upload Your Resume")
+    st.subheader("Upload Your Resume")
     uploaded_file = st.file_uploader("Upload your resume (PDF)", type=["pdf"])
     
     if uploaded_file and st.session_state.resume_text is None:
         with st.spinner("Processing your resume..."):
             st.session_state.resume_text = extract_text_from_pdf(uploaded_file)
-        st.success("✅ Resume processed successfully!")
+        st.success(" Resume processed successfully!")
 
 # Page content based on selection
-if page == "📄 Resume Analysis":
+if page == " Resume Analysis":
     if st.session_state.resume_text:
-        st.header("📑 Comprehensive Resume Analysis")
+        st.header(" Comprehensive Resume Analysis")
         
         col1, col2 = st.columns(2)
         
@@ -70,7 +70,7 @@ if page == "📄 Resume Analysis":
                     max_tokens=600
                 )
             
-            st.subheader("📋 Resume Summary")
+            st.subheader(" Resume Summary")
             st.markdown(f"""
             <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
                         padding: 20px; border-radius: 15px; color: white; margin: 10px 0;'>
@@ -85,7 +85,7 @@ if page == "📄 Resume Analysis":
                     max_tokens=500
                 )
             
-            st.subheader("🎯 Skill Gap Analysis")
+            st.subheader(" Skill Gap Analysis")
             st.markdown(f"""
             <div style='background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); 
                         padding: 20px; border-radius: 15px; color: white; margin: 10px 0;'>
@@ -100,7 +100,7 @@ if page == "📄 Resume Analysis":
                 max_tokens=600
             )
         
-        st.subheader("🚀 Personalized Career Roadmap")
+        st.subheader(" Personalized Career Roadmap")
         st.markdown(f"""
         <div style='background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); 
                     padding: 20px; border-radius: 15px; color: white; margin: 10px 0;'>
@@ -109,16 +109,16 @@ if page == "📄 Resume Analysis":
         """, unsafe_allow_html=True)
         
         # RAG-based insights
-        if st.button("🔍 Get AI-Powered Career Insights", type="primary"):
+        if st.button(" Get AI-Powered Career Insights", type="primary"):
             with st.spinner("Analyzing job market data..."):
                 insights = st.session_state.rag_engine.get_career_insights(st.session_state.resume_text)
             
-            st.subheader("🎯 Market-Based Career Insights")
+            st.subheader(" Market-Based Career Insights")
             st.markdown(insights['insights'])
             
-            st.subheader("💼 Relevant Job Opportunities")
+            st.subheader(" Relevant Job Opportunities")
             for i, job in enumerate(insights['relevant_jobs'][:5]):
-                with st.expander(f"🏢 {job['job_title']} - {job['industry']}"):
+                with st.expander(f" {job['job_title']} - {job['industry']}"):
                     col1, col2 = st.columns(2)
                     with col1:
                         st.write(f"**Skills Required:** {job['skills'][:200]}...")
@@ -130,10 +130,10 @@ if page == "📄 Resume Analysis":
                         st.caption(f"Relevance: {job['relevance_score']:.2%}")
     
     else:
-        st.info("👆 Please upload your resume to start the analysis")
+        st.info(" Please upload your resume to start the analysis")
 
-elif page == "💬 Career Chat":
-    st.header("💬 Chat with Your AI Career Advisor")
+elif page == " Career Chat":
+    st.header(" Chat with Your AI Career Advisor")
     
     if st.session_state.resume_text:
         # Display chat history
@@ -160,32 +160,32 @@ elif page == "💬 Career Chat":
                 st.session_state.chat_history.append({"role": "assistant", "content": response})
         
         # Quick action buttons
-        st.subheader("💡 Quick Questions")
+        st.subheader(" Quick Questions")
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            if st.button("💰 Salary Expectations"):
+            if st.button(" Salary Expectations"):
                 prompt = "What should be my salary expectations based on my profile?"
                 st.session_state.chat_history.append({"role": "user", "content": prompt})
                 st.rerun()
         
         with col2:
-            if st.button("📈 Career Growth"):
+            if st.button(" Career Growth"):
                 prompt = "What are the best career growth opportunities for me?"
                 st.session_state.chat_history.append({"role": "user", "content": prompt})
                 st.rerun()
         
         with col3:
-            if st.button("🎓 Skill Development"):
+            if st.button(" Skill Development"):
                 prompt = "What skills should I focus on developing next?"
                 st.session_state.chat_history.append({"role": "user", "content": prompt})
                 st.rerun()
     
     else:
-        st.info("👆 Please upload your resume to start chatting with your career advisor")
+        st.info(" Please upload your resume to start chatting with your career advisor")
 
-elif page == "📊 Market Analytics":
-    st.header("📊 Career Market Analytics")
+elif page == " Market Analytics":
+    st.header(" Career Market Analytics")
     
     if st.session_state.resume_text:
         # Extract skills from resume
@@ -197,7 +197,7 @@ elif page == "📊 Market Analytics":
         exp_match = re.search(r'(\d+)\s*(?:years?|yrs?)', st.session_state.resume_text.lower())
         experience_level = int(exp_match.group(1)) if exp_match else 3
         
-        tab1, tab2, tab3 = st.tabs(["💰 Salary Insights", "📈 Skill Demand", "🏢 Industry Trends"])
+        tab1, tab2, tab3 = st.tabs([" Salary Insights", " Skill Demand", " Industry Trends"])
         
         with tab1:
             st.subheader("💰 Salary Analysis for Your Profile")
@@ -219,7 +219,7 @@ elif page == "📊 Market Analytics":
                 st.warning(salary_insights['message'])
         
         with tab2:
-            st.subheader("📈 Skill Demand Analysis")
+            st.subheader(" Skill Demand Analysis")
             skill_analysis = st.session_state.analytics_engine.get_skill_demand_analysis(user_skills)
             
             col1, col2 = st.columns(2)
@@ -230,7 +230,7 @@ elif page == "📊 Market Analytics":
                 st.plotly_chart(skill_analysis['market_trends_chart'], use_container_width=True)
         
         with tab3:
-            st.subheader("🏢 Industry & Role Insights")
+            st.subheader(" Industry & Role Insights")
             industry_insights = st.session_state.analytics_engine.get_industry_insights(user_skills)
             
             col1, col2 = st.columns(2)
@@ -240,13 +240,13 @@ elif page == "📊 Market Analytics":
                 st.plotly_chart(industry_insights['roles_chart'], use_container_width=True)
     
     else:
-        st.info("👆 Please upload your resume to view market analytics")
+        st.info(" Please upload your resume to view market analytics")
 
-elif page == "🔍 Job Search":
-    st.header("🔍 Intelligent Job Search")
+elif page == " Job Search":
+    st.header(" Intelligent Job Search")
     if st.session_state.resume_text:
         # Get job recommendations
-        if st.button("🎯 Get Personalized Job Recommendations", type="primary"):
+        if st.button(" Get Personalized Job Recommendations", type="primary"):
             with st.spinner("Analyzing your profile and finding matching jobs..."):
                 # Extract keywords using AI
                 keywords = ask_groq(
@@ -255,7 +255,7 @@ elif page == "🔍 Job Search":
                 )
                 search_keywords = keywords.replace("\n", "").strip()
             
-            st.success(f"🔍 Search Keywords: {search_keywords}")
+            st.success(f"Search Keywords: {search_keywords}")
             
             # Search using RAG
             with st.spinner("Finding relevant opportunities..."):
@@ -264,9 +264,9 @@ elif page == "🔍 Job Search":
                     n_results=10
                 )
             
-            st.subheader("🎯 AI-Matched Opportunities")
+            st.subheader(" AI-Matched Opportunities")
             for job in rag_jobs:
-                with st.expander(f"🏢 {job['job_title']} - Relevance: {job['relevance_score']:.1%}"):
+                with st.expander(f" {job['job_title']} - Relevance: {job['relevance_score']:.1%}"):
                     col1, col2 = st.columns(2)
                     with col1:
                         st.write(f"**Skills:** {job['skills'][:150]}...")
@@ -277,9 +277,9 @@ elif page == "🔍 Job Search":
                         st.write(f"**Salary:** {job['salary']}")
         
         # External job search - separate button
-        st.subheader("🌐 Live Job Postings")
+        st.subheader(" Live Job Postings")
         
-        if st.button("🔎 Get Job Recommendations"):
+        if st.button(" Get Job Recommendations"):
             with st.spinner("Fetching job recommendations..."):
                 # Generate resume summary for keyword extraction
                 summary = ask_groq(
@@ -302,21 +302,21 @@ elif page == "🔍 Job Search":
             if linkedin_jobs:
                 for job in linkedin_jobs:
                     st.markdown(f"**{job.get('title')}** at *{job.get('companyName')}*")
-                    st.markdown(f"- 📍 {job.get('location')}")
-                    st.markdown(f"- 🔗 [View Job]({job.get('link')})")
+                    st.markdown(f"-  {job.get('location')}")
+                    st.markdown(f"- [View Job]({job.get('link')})")
                     st.markdown("---")
             else:
                 st.warning("No LinkedIn jobs found.")
     
     else:
-        st.info("👆 Please upload your resume to search for jobs")
+        st.info(" Please upload your resume to search for jobs")
 
 # Footer
 st.markdown("---")
 st.markdown(
     """
     <div style='text-align: center; color: #666; padding: 20px;'>
-        🤖 Powered by RAG Technology & AI | Built with Streamlit
+         Powered by RAG Technology & AI | Built with Streamlit
     </div>
     """, 
     unsafe_allow_html=True
