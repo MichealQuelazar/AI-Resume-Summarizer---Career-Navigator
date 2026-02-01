@@ -150,7 +150,6 @@ streamlit run app.py
 ```
 
 
-
 ##  Demo(pt1 and 2)
 [<img width="640" alt="Demo Part 1" src="https://github.com/user-attachments/assets/ff4c1239-5e1e-4e1d-99f5-0b8e16ad716e" />](https://drive.google.com/file/d/1SAXS_lVL5ijFA62GNP3oJ0D8h6NzldO2/preview)
 
@@ -158,11 +157,6 @@ streamlit run app.py
 [<img width="640" alt="Demo Part 2" src="https://github.com/user-attachments/assets/0404c056-72b9-4b06-be7e-a709d4a3df1b" />](https://drive.google.com/file/d/1vK4c-dGYzBcvGn9NHiXwnMN0LAUpuThE/preview)
 
 
-
-## 🏆 Hackathon Context
-
--   Built in **2 hours** during a hackathon.
--   Focused on **AI + career guidance + real-time job data**.
 -   Now deployed on Streamlit cloud
 
 ## 📌 Future Enhancements
